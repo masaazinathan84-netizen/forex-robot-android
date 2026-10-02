@@ -20,7 +20,13 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
@@ -32,10 +38,8 @@ data class Trade(
 )
 
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
             ForexRobotApp()
         }
@@ -44,7 +48,6 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ForexRobotApp() {
-
     var running by remember { mutableStateOf(false) }
     var risk by remember { mutableFloatStateOf(1.0f) }
     var balance by remember { mutableStateOf(10000.0) }
@@ -73,7 +76,9 @@ fun ForexRobotApp() {
                         style = MaterialTheme.typography.headlineMedium
                     )
 
-                    Text("Automated forex trading • DEMO MODE")
+                    Text(
+                        text = "Automated forex trading • DEMO MODE"
+                    )
                 }
 
                 item {
@@ -88,10 +93,18 @@ fun ForexRobotApp() {
                                 style = MaterialTheme.typography.titleLarge
                             )
 
-                            Spacer(Modifier.height(8.dp))
+                            Spacer(
+                                modifier = Modifier.height(8.dp)
+                            )
 
-                            Text("Balance: %.2f".format(balance))
-                            Text("Equity: %.2f".format(balance + 7.60))
+                            Text(
+                                "Balance: %.2f".format(balance)
+                            )
+
+                            Text(
+                                "Equity: %.2f".format(balance + 7.60)
+                            )
+
                             Text("Mode: PAPER / DEMO")
                         }
                     }
@@ -110,11 +123,11 @@ fun ForexRobotApp() {
                                 horizontalArrangement =
                                     Arrangement.SpaceBetween
                             ) {
+
                                 Column {
                                     Text(
                                         "Robot",
-                                        style =
-                                            MaterialTheme.typography.titleLarge
+                                        style = MaterialTheme.typography.titleLarge
                                     )
 
                                     Text(
@@ -133,16 +146,19 @@ fun ForexRobotApp() {
                                 )
                             }
 
-                            Spacer(Modifier.height(8.dp))
+                            Spacer(
+                                modifier = Modifier.height(8.dp)
+                            )
 
                             Text("Strategy: EMA crossover")
 
                             Text(
-                                "Risk per trade: %.1f%%"
-                                    .format(risk)
+                                "Risk per trade: %.1f%%".format(risk)
                             )
 
-                            Spacer(Modifier.height(8.dp))
+                            Spacer(
+                                modifier = Modifier.height(8.dp)
+                            )
 
                             Button(
                                 modifier = Modifier.fillMaxWidth(),
@@ -157,7 +173,9 @@ fun ForexRobotApp() {
                                 Text("Adjust Risk")
                             }
 
-                            Spacer(Modifier.height(4.dp))
+                            Spacer(
+                                modifier = Modifier.height(4.dp)
+                            )
 
                             OutlinedButton(
                                 modifier = Modifier.fillMaxWidth(),
@@ -183,6 +201,7 @@ fun ForexRobotApp() {
                     Card(
                         modifier = Modifier.fillMaxWidth()
                     ) {
+
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -190,10 +209,12 @@ fun ForexRobotApp() {
                             horizontalArrangement =
                                 Arrangement.SpaceBetween
                         ) {
+
                             Column {
                                 Text(
                                     "${trade.pair} • ${trade.side}"
                                 )
+
                                 Text(trade.price)
                             }
 
@@ -203,9 +224,11 @@ fun ForexRobotApp() {
                 }
 
                 item {
+
                     OutlinedButton(
                         modifier = Modifier.fillMaxWidth(),
                         onClick = {
+
                             trades.add(
                                 0,
                                 Trade(
